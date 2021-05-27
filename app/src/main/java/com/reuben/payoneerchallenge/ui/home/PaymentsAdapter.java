@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -11,15 +13,23 @@ import com.reuben.payoneerchallenge.R;
 import com.reuben.payoneerchallenge.data.models.Applicable;
 import com.reuben.payoneerchallenge.databinding.LayoutPaymentItemBinding;
 
-import java.util.List;
+public class PaymentsAdapter extends ListAdapter<Applicable, PaymentsAdapter.PaymentsViewHolder> {
 
-public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.PaymentsViewHolder> {
-
-    private final List<Applicable> applicables;
     private final OnNetworkItemClicked onNetworkItemClicked;
 
-    public PaymentsAdapter(List<Applicable> applicables, OnNetworkItemClicked onNetworkItemClicked) {
-        this.applicables = applicables;
+
+    public PaymentsAdapter(OnNetworkItemClicked onNetworkItemClicked) {
+        super(new DiffUtil.ItemCallback<Applicable>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Applicable oldItem, @NonNull Applicable newItem) {
+                return oldItem.getCode().equals(newItem.getCode());
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull Applicable oldItem, @NonNull Applicable newItem) {
+                return oldItem.getLabel().equals(newItem.getLabel());
+            }
+        });
         this.onNetworkItemClicked = onNetworkItemClicked;
     }
 
@@ -32,7 +42,7 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
 
     @Override
     public void onBindViewHolder(@NonNull PaymentsViewHolder holder, int position) {
-        Applicable applicable = applicables.get(position);
+        Applicable applicable = getItem(position);
         LayoutPaymentItemBinding binding = holder.binding;
 
         binding.tvPaymentName.setText(applicable.getLabel());
@@ -47,10 +57,6 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
 
     }
 
-    @Override
-    public int getItemCount() {
-        return applicables.size();
-    }
 
     static class PaymentsViewHolder extends RecyclerView.ViewHolder {
         LayoutPaymentItemBinding binding;
@@ -64,7 +70,8 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
 
     }
 
-
 }
+
+
 
 

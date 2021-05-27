@@ -55,8 +55,9 @@ public class HomeActivity extends AppCompatActivity implements OnNetworkItemClic
             List<Applicable> applicableList = paymentResponse.getNetworks().getApplicable();
 
             if (!applicableList.isEmpty()) {
-                paymentsAdapter = new PaymentsAdapter(applicableList, this);
+                paymentsAdapter = new PaymentsAdapter(this);
                 binding.paymentsRecycler.setAdapter(paymentsAdapter);
+                paymentsAdapter.submitList(applicableList);
             }
         });
 
