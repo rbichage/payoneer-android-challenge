@@ -2,7 +2,7 @@
 Payoneer challenge for an Android Engineer role
 
 ## Design
-This project follows MVVM architecture a.k.a Jetpack Components. 
+This project follows [MVVM architecture](https://developer.android.com/jetpack/guide) a.k.a Jetpack Components. 
 Sample screenshot of architecture.
 
 ![android jetpack](https://user-images.githubusercontent.com/17246592/119951852-12bfc980-bfa5-11eb-89a5-0e9ad996f58d.png)
