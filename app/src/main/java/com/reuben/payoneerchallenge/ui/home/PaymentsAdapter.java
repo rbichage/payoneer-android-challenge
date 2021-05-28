@@ -54,14 +54,11 @@ public class PaymentsAdapter extends ListAdapter<Applicable, PaymentsAdapter.Pay
 
         binding.getRoot().setOnClickListener(v -> onNetworkItemClicked.getNetwork(applicable));
 
-
     }
 
 
     static class PaymentsViewHolder extends RecyclerView.ViewHolder {
         LayoutPaymentItemBinding binding;
-
-
         public PaymentsViewHolder(LayoutPaymentItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
